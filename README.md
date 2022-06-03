@@ -13,62 +13,45 @@ Alternatively, pre-processed dataset can be downloaded from https://github.com/J
 
 ## Usage
 
-Training and Evaluation will perform the actions on all four models. Most of the parameters have defaults and can be skipped.
+Training and Evaluation will perform the actions on all four models. If you wish to train/eval only one model, pass it as --model_name. 
 
 ### Training
 ~~~
-python main.py
---max_enc_len=400
---max_dec_len=100
---max_dec_steps=120
---min_dec_steps=30
---batch_size=4
---beam_size=4
---vocab_size=50000
---embed_size=128
---enc_units=256
---dec_units=256
---attn_units=512
---learning_rate=0.15
---adagrad_init_acc=0.1
---max_grad_norm=0.8
---mode="train"
---checkpoints_save_steps=5000
---max_steps=38000
---num_to_test=5
---max_num_to_eval=100
---vocab_path="./dataset/vocab" 
---data_dir="./dataset/chunked_train" 
---checkpoint_dir="./checkpoint" 
---test_save_dir="./test/"
---log_dir="./log/"
+python main.py --mode="train" --vocab_path="./dataset/vocab" --data_dir="./dataset/chunked_train"
 ~~~
 
 ### Evaluation
 ~~~
-python main.py
---max_enc_len=400
---max_dec_len=100
---max_dec_steps=120
---min_dec_steps=30
---batch_size=4
---beam_size=4
---vocab_size=50000
---embed_size=128
---enc_units=256
---dec_units=256
---attn_units=512
---learning_rate=0.15
---adagrad_init_acc=0.1
---max_grad_norm=0.8
---mode="eval"
---checkpoints_save_steps=5000
---max_steps=38000
---num_to_test=5
---max_num_to_eval=100
---vocab_path="./dataset/vocab" 
---data_dir="./dataset/chunked_val" 
---checkpoint_dir="./checkpoint" 
---test_save_dir="./test/"
---log_dir="./log/"
+python main.py --mode="eval" --vocab_path="./dataset/vocab" --data_dir="./dataset/chunked_val"
 ~~~
+
+### Parameters
+
+Most of the parameters have defaults and can be skipped. Here are the parameters that you can tweak along with their defaults.
+
+| Parameter               | Default         | Description                                                                                                             |
+| ----------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| max_enc_len             | 512             | Encoder input max sequence length                                                                                       |
+| max_dec_len             | 128             | Decoder input max sequence length                                                                                       |
+| max_dec_steps           | 128             | maximum number of words of the predicted abstract                                                                       |
+| min_dec_steps           | 32              | Minimum number of words of the predicted abstract                                                                       |
+| batch_size              | 4               | batch size                                                                                                              |
+| beam_size               | 4               | beam size for beam search decoding (must be equal to batch size in decode mode)                                         |
+| vocab_size              | 50000           | Vocabulary size                                                                                                         |
+| embed_size              | 128             | Words embeddings dimension                                                                                              |
+| enc_units               | 256             | Encoder LSTM/GRU cell units number                                                                                      |
+| dec_units               | 256             | Decoder LSTM/GRU cell units number                                                                                      |
+| attn_units              | 512             | [context vector, decoder state, decoder input] feedforward result dimension - used to compute the attention weights     |
+| learning_rate           | 0.15            | Learning rate                                                                                                           |
+| adagrad_init_acc        | 0.1             | Adagrad optimizer initial accumulator value. Please refer to the Adagrad optimizer API documentation on tensorflow site |
+| max_grad_norm           | 0.8             | Gradient norm above which gradients must be clipped                                                                     |
+| checkpoints_save_steps  | 1000            | Save checkpoints every N steps                                                                                          |
+| max_steps               | 50000           | Max number of iterations                                                                                                |
+| max_num_to_eval         | 100             | Max number of examples to evaluate                                                                                      |
+| checkpoint_dir          | "./checkpoint/" | Checkpoint directory                                                                                                    |
+| test_save_dir           | "./test/"       | Directory in which we store the decoding results                                                                        |
+| log_dir                 | "./log/"        | Directory in which to write logs                                                                                        |
+| data_dir                | None            | Data Folder                                                                                                             |
+| vocab_path              | None            | Path to vocab file                                                                                                      |
+| mode                    | None            | Should be "train" or "eval"                                                                                             |
+| model_name              | None            | Name of a specific model. If empty, all models are used                                                                 |
