@@ -1,4 +1,4 @@
-# Text Summarization using Pointer Generators while comparing the performance of LSTM and GRU
+# Comparing the performance of LSTM and GRU for Text Summarization using Pointer Generator Networks
 
 Compare the performance of LSTM and GRU in Text Summarization using Pointer Generator Networks as discussed in https://github.com/abisee/pointer-generator
 
