@@ -37,7 +37,7 @@ def train_model(model, dataset, params, ckpt, ckpt_manager, out_file):
   
   
   try:
-    f = open(out_file,"w+")
+    f = open(out_file,"a+")
     for batch in dataset:
       t0 = time.time()
       loss = train_step(batch[0]["enc_input"], batch[0]["extended_enc_input"], batch[1]["dec_input"], batch[1]["dec_target"], batch[0]["max_oov_len"])

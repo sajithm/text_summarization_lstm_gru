@@ -15,10 +15,8 @@ class LstmEncoder(tf.keras.layers.Layer):
     x = self.embedding(x)
     output, state, _ = self.lstm(x, initial_state=hidden)
     return output, state
-    
 
   def initialize_hidden_state(self):
-    #return tf.zeros((self.batch_sz, self.enc_units))
     return [tf.zeros((self.batch_sz, self.enc_units)) for i in range(2)]
   
   
@@ -34,27 +32,12 @@ class LstmDecoder(tf.keras.layers.Layer):
                                    recurrent_initializer='glorot_uniform')
     self.fc = tf.keras.layers.Dense(vocab_size, activation=tf.keras.activations.softmax)
     
-
   def call(self, x, hidden, enc_output, context_vector):
-    # enc_output shape == (batch_size, max_length, hidden_size)
-    
-
-    # x shape after passing through embedding == (batch_size, 1, embedding_dim)
     x = self.embedding(x)
-
-    # x shape after concatenation == (batch_size, 1, embedding_dim + hidden_size)
     x = tf.concat([tf.expand_dims(context_vector, 1), x], axis=-1)
-
-    # passing the concatenated vector to the GRU
-    #output, state = self.gru(x)
     output, state, carry = self.lstm(x)
-
-    # output shape == (batch_size * 1, hidden_size)
     output = tf.reshape(output, (-1, output.shape[2]))
-
-    # output shape == (batch_size, vocab)
     out = self.fc(output)
-
     return x, out, state
   
   
@@ -73,7 +56,6 @@ class GruEncoder(tf.keras.layers.Layer):
     x = self.embedding(x)
     output, state = self.gru(x, initial_state=hidden)
     return output, state
-    
 
   def initialize_hidden_state(self):
     return tf.zeros((self.batch_sz, self.enc_units))
@@ -91,18 +73,12 @@ class GruDecoder(tf.keras.layers.Layer):
                                    recurrent_initializer='glorot_uniform')
     self.fc = tf.keras.layers.Dense(vocab_size, activation=tf.keras.activations.softmax)
     
-
   def call(self, x, hidden, enc_output, context_vector):
     x = self.embedding(x)
-
     x = tf.concat([tf.expand_dims(context_vector, 1), x], axis=-1)
-
     output, state = self.gru(x)
-
     output = tf.reshape(output, (-1, output.shape[2]))
-    
     out = self.fc(output)
-
     return x, out, state
  
  
@@ -114,29 +90,15 @@ class BahdanauAttention(tf.keras.layers.Layer):
     self.V = tf.keras.layers.Dense(1)
 
   def call(self, query, values):
-    # hidden shape == (batch_size, hidden size)
-    # hidden_with_time_axis shape == (batch_size, 1, hidden size)
-    # we are doing this to perform addition to calculate the score
     hidden_with_time_axis = tf.expand_dims(query, 1)
-
-    # score shape == (batch_size, max_length, 1)
-    # we get 1 at the last axis because we are applying score to self.V
-    # the shape of the tensor before applying self.V is (batch_size, max_length, units)
-    score = self.V(tf.nn.tanh(
-        self.W1(values) + self.W2(hidden_with_time_axis)))
-
-    # attention_weights shape == (batch_size, max_length, 1)
+    score = self.V(tf.nn.tanh(self.W1(values) + self.W2(hidden_with_time_axis)))
     attention_weights = tf.nn.softmax(score, axis=1)
-
-    # context_vector shape after sum == (batch_size, hidden_size)
     context_vector = attention_weights * values
     context_vector = tf.reduce_sum(context_vector, axis=1)
-
     return context_vector, tf.squeeze(attention_weights,-1)
   
 
 class Pointer(tf.keras.layers.Layer):
-  
   def __init__(self):
     super(Pointer, self).__init__()
     self.w_s_reduce = tf.keras.layers.Dense(1)
