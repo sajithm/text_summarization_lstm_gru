@@ -102,7 +102,7 @@ def evaluate_model(encoder, decoder, params):
     print("Model restored from", ckpt_path)
 
     for batch in b:
-        yield  beam_decode(model, batch, vocab, params)
+        yield beam_decode(model, batch, vocab, params)
 
 def evaluate(params):
     assert params["mode"].lower() == "eval", "change training mode to 'eval'"
@@ -118,10 +118,20 @@ def evaluate(params):
                 preds = []
                 with tqdm(total=params["max_num_to_eval"],position=0, leave=True) as pbar:
                     for i in range(params["max_num_to_eval"]):
-                        trial = next(gen)
-                        reals.append(trial.real_abstract)
-                        preds.append(trial.abstract)
-                        pbar.update(1)
+                        try:
+                            trial = next(gen)
+                            reals.append(trial.real_abstract)
+                            preds.append(trial.abstract)
+                            pbar.update(1)
+                            
+                            #print("\n\nActual Text")
+                            #print(trial.text)
+                            #print("\nReal Abstract")
+                            #print(trial.real_abstract)
+                            #print("\nPredicted Abstract")
+                            #print(trial.abstract)
+                        except Exception as e: 
+                            print(e)
                 r=Rouge()
                 scores = r.get_scores(preds, reals, avg=True)
                 print("\n\n")
