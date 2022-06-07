@@ -130,8 +130,8 @@ def evaluate(params):
                             #print(trial.real_abstract)
                             #print("\nPredicted Abstract")
                             #print(trial.abstract)
-                        except Exception as e: 
-                            print(e)
+                        except Exception as ex: 
+                            print(ex)
                 r=Rouge()
                 scores = r.get_scores(preds, reals, avg=True)
                 print("\n\n")
