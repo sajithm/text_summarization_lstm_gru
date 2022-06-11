@@ -28,7 +28,7 @@ def train(params):
                 print("Creating the checkpoint manager")
                 checkpoint_dir = "{0}/{1}".format(params["checkpoint_dir"], model_name)
                 ckpt = tf.train.Checkpoint(step=tf.Variable(0), PGN=model)
-                ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=11)
+                ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=params["max_checkpoints"])
 
                 ckpt.restore(ckpt_manager.latest_checkpoint)
                 if ckpt_manager.latest_checkpoint:
@@ -57,7 +57,7 @@ def test(params):
     print("Creating the checkpoint manager")
     checkpoint_dir = "{}".format(params["checkpoint_dir"])
     ckpt = tf.train.Checkpoint(step=tf.Variable(0), PGN=model)
-    ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=11)
+    ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=params["max_checkpoints"])
 
     path = params["model_path"] if params["model_path"] else ckpt_manager.latest_checkpoint
     ckpt.restore(path)
@@ -95,7 +95,7 @@ def evaluate_model(encoder, decoder, params):
     print("Creating the checkpoint manager")
     checkpoint_dir = "{0}/{1}".format(params["checkpoint_dir"], model_name)
     ckpt = tf.train.Checkpoint(step=tf.Variable(0), PGN=model)
-    ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=11)
+    ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_dir, max_to_keep=params["max_checkpoints"])
     
     ckpt_path = ckpt_manager.latest_checkpoint
     ckpt.restore(ckpt_path)

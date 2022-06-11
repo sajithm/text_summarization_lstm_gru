@@ -46,6 +46,7 @@ Most of the parameters have defaults and can be skipped. Here are the parameters
 | adagrad_init_acc        | 0.1             | Adagrad optimizer initial accumulator value. Please refer to the Adagrad optimizer API documentation on tensorflow site |
 | max_grad_norm           | 0.8             | Gradient norm above which gradients must be clipped                                                                     |
 | checkpoints_save_steps  | 1000            | Save checkpoints every N steps                                                                                          |
+| max_checkpoints         | 10              | Maximum number of checkpoints to keep. Older ones are deleted                                                           |
 | max_steps               | 50000           | Max number of iterations                                                                                                |
 | max_num_to_eval         | 100             | Max number of examples to evaluate                                                                                      |
 | checkpoint_dir          | "./checkpoint/" | Checkpoint directory                                                                                                    |
