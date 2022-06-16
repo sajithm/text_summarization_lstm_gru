@@ -11,6 +11,13 @@ Dataset can be created and processed based on the instructions at https://github
 
 Alternatively, pre-processed dataset can be downloaded from https://github.com/JafferWilson/Process-Data-of-CNN-DailyMail
 
+Easiest way yet, download the [dataset zip file](https://drive.google.com/file/d/1C-pLHLlpL4Ca6S0mxhBpY8cCLCGqOb0f/view?usp=sharing)
+and extract it into the dataset directory (by default, this will be "./dataset/")
+
+## Pre-Trained Models
+In case you want to skip the training and run evaluate the models, you can download the [checkpoint zip file](https://drive.google.com/file/d/1zAWDhxwvc9gZe-bgmkOXVuZqCEed98Oq/view?usp=sharing)
+and extract it into the checkpoint directory (by default, this will be "./checkpoint/").
+
 ## Usage
 
 Training and Evaluation will perform the actions on all four models. If you wish to train/eval only one model, pass it as --model_name. 
