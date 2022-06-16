@@ -27,11 +27,11 @@ def main():
   parser.add_argument("--max_num_to_eval", default=100, help="Max number of examples to evaluate", type=int)
   parser.add_argument("--mode", help="training, eval or test options", default="", type=str)
   parser.add_argument("--model_name", help="Name of a specific model", default="", type=str)
-  parser.add_argument("--checkpoint_dir", help="Checkpoint directory", default="./checkpoint/", type=str)
-  parser.add_argument("--test_save_dir", help="Directory in which we store the decoding results", default="./test/", type=str)
+  parser.add_argument("--checkpoint_dir", help="Checkpoint directory", default="./checkpoint", type=str)
+  parser.add_argument("--test_save_dir", help="Directory in which we store the decoding results", default="./test", type=str)
   parser.add_argument("--data_dir",  help="Data Folder", default="", type=str)
   parser.add_argument("--vocab_path", help="Vocab path", default="", type=str)
-  parser.add_argument("--log_dir", help="Directory in which to redirect console outputs", default="./log/", type=str)
+  parser.add_argument("--log_dir", help="Directory in which to redirect console outputs", default="./log", type=str)
 
 
   args = parser.parse_args()
