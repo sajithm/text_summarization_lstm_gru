@@ -43,15 +43,10 @@ def main():
   assert os.path.exists(params["data_dir"]), "data_dir doesn't exist"
   assert os.path.isfile(params["vocab_path"]), "vocab_path doesn't exist"
 
-  t0 = time.time()
   if params["mode"] == "train":
     train( params)
   elif params["mode"] == "eval":
     evaluate(params)
-  t1 = time.time()
-  total = t1-t0
-  print(f"Time Taken: {0}", total)
-  
   
 if __name__ =="__main__":
   main()
