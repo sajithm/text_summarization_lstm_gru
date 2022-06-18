@@ -102,6 +102,11 @@ class Data_Helper:
           w = article_oovs[article_oov_idx]
         except ValueError as e: # i doesn't correspond to an article oov
           raise ValueError('Error: model produced word ID %i which corresponds to article OOV %i but this example only has %i article OOVs' % (i, article_oov_idx, len(article_oovs)))
+      if type(w) != str:
+        try:
+          w = w.numpy().decode("utf-8")
+        except:
+          pass
       words.append(w)
     return words
 
