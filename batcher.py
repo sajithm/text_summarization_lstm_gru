@@ -203,7 +203,7 @@ def example_generator(filenames, vocab, max_enc_len, max_dec_len, mode, batch_si
         "abstract" : abstract,
         "abstract_sents" : abstract_sentences
     }
-    if mode == "test" or mode == "eval":
+    if mode == "eval":
       for _ in range(batch_size):
         yield output
     else:

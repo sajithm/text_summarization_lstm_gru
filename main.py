@@ -23,7 +23,6 @@ def main():
   parser.add_argument("--checkpoints_save_steps", default=1000, help="Save checkpoints every N steps", type=int)
   parser.add_argument("--max_checkpoints", default=10, help="Maximum number of checkpoints to keep. Olders ones will be removed", type=int)
   parser.add_argument("--max_steps", default=50000, help="Max number of iterations", type=int)
-  parser.add_argument("--num_to_test", default=100, help="Number of examples to test", type=int)
   parser.add_argument("--max_num_to_eval", default=100, help="Max number of examples to evaluate", type=int)
   parser.add_argument("--mode", help="training, eval or test options", default="", type=str)
   parser.add_argument("--model_name", help="Name of a specific model", default="", type=str)
