@@ -132,4 +132,4 @@ dmypy.json
 /checkpoint
 /dataset
 /log
-/test
+/result

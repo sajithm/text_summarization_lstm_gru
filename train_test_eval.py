@@ -83,6 +83,14 @@ def evaluate(params):
                         trial = next(gen)
                         reals.append(trial.real_abstract)
                         preds.append(trial.abstract)
+                        if params["results_save_dir"] != None and params["results_save_dir"] != "":
+                            with open(params["results_save_dir"]+"/" + model_name + "_" + str(i) + ".txt", "w") as f:
+                                f.write("Article:\n")
+                                f.write(trial.text)
+                                f.write("\n\nReal Abstract:\n")
+                                f.write(trial.real_abstract)
+                                f.write("\n\nPredicted Abstract:\n")
+                                f.write(trial.abstract)
                         pbar.update(1)
                 r=Rouge()
                 scores = r.get_scores(preds, reals, avg=True)

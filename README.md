@@ -57,7 +57,7 @@ Most of the parameters have defaults and can be skipped. Here are the parameters
 | max_steps               | 50000           | Max number of iterations                                                                                                |
 | max_num_to_eval         | 100             | Max number of examples to evaluate                                                                                      |
 | checkpoint_dir          | "./checkpoint"  | Checkpoint directory                                                                                                    |
-| test_save_dir           | "./test"        | Directory in which we store the decoding results                                                                        |
+| results_save_dir        | "./result"      | Directory in which we write the intermediate results (actual and predicted summaries) during evaluation                 |
 | log_dir                 | "./log"         | Directory in which to write logs                                                                                        |
 | data_dir                | None            | Data Folder                                                                                                             |
 | vocab_path              | None            | Path to vocab file                                                                                                      |
