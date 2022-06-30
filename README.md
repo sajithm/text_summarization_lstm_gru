@@ -4,7 +4,12 @@ Compare the performance of LSTM and GRU in Text Summarization using Pointer Gene
 
 Based on code at https://github.com/steph1793/Pointer_Generator_Summarizer
 
-## Dataset
+## Prerequisites
+Python 3.7+    
+Tensorflow 2.8+ (Any 2.x should work, but not tested)    
+rouge 1.0.1 (pip install rouge)
+
+### Dataset
 We use the CNN-DailyMail dataset. The application reads data in the tfrecords format files.
 
 Dataset can be created and processed based on the instructions at https://github.com/abisee/cnn-dailymail
@@ -14,7 +19,7 @@ Alternatively, pre-processed dataset can be downloaded from https://github.com/J
 Easiest way yet, download the [dataset zip file](https://drive.google.com/file/d/1C-pLHLlpL4Ca6S0mxhBpY8cCLCGqOb0f/view?usp=sharing)
 and extract it into the dataset directory (by default, this will be "./dataset/")
 
-## Pre-Trained Models
+## Pre-Trained Models (Optional)
 In case you want to skip the training and run evaluate the models, you can download the [checkpoint zip file](https://drive.google.com/file/d/1zAWDhxwvc9gZe-bgmkOXVuZqCEed98Oq/view?usp=sharing)
 and extract it into the checkpoint directory (by default, this will be "./checkpoint/").
 

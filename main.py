@@ -43,6 +43,12 @@ def main():
   assert os.path.exists(params["data_dir"]), "data_dir doesn't exist"
   assert os.path.isfile(params["vocab_path"]), "vocab_path doesn't exist"
 
+  try: #Try to create the log directory if it does not already exist
+    os.makedirs(params["log_dir"], exist_ok = True)
+  except OSError as error:
+    print("Could not create log_dir")
+  assert os.path.exists(params["log_dir"]), "log_dir doesn't exist"
+
   if params["results_dir"] != None and params["results_dir"] != "":
     try: #Try to create the Results directory if it does not already exist
       os.makedirs(params["results_dir"], exist_ok = True)
