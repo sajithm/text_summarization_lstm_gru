@@ -27,11 +27,10 @@ def main():
   parser.add_argument("--mode", help="train or eval", default="", type=str)
   parser.add_argument("--model_name", help="Name of a specific model", default="", type=str)
   parser.add_argument("--checkpoint_dir", help="Checkpoint directory", default="./checkpoint", type=str)
-  parser.add_argument("--results_save_dir", help="Directory in which we write the intermediate results (actual and predicted summaries) during evaluation", default="", type=str)
+  parser.add_argument("--results_dir", help="Directory in which we write the intermediate results (actual and predicted summaries) during evaluation", default="", type=str)
   parser.add_argument("--data_dir",  help="Data Folder", default="", type=str)
   parser.add_argument("--vocab_path", help="Vocab path", default="", type=str)
   parser.add_argument("--log_dir", help="Directory in which to redirect console outputs", default="./log", type=str)
-
 
   args = parser.parse_args()
   params = vars(args)
@@ -40,13 +39,21 @@ def main():
   assert params["mode"], "mode is required and must be train or eval"
   assert params["mode"] in ["train", "eval"], "The mode must be train or eval"
   assert (not params["model_name"]) or (params["model_name"].upper() in ["LSTM_LSTM", "LSTM_GRU", "GRU_LSTM", "GRU_GRU"]), "The model name must be empty or one of these: LSTM_LSTM, LSTM_GRU, GRU_LSTM or GRU_GRU"
+
   assert os.path.exists(params["data_dir"]), "data_dir doesn't exist"
   assert os.path.isfile(params["vocab_path"]), "vocab_path doesn't exist"
+
+  if params["results_dir"] != None and params["results_dir"] != "":
+    try: #Try to create the Results directory if it does not already exist
+      os.makedirs(params["results_dir"], exist_ok = True)
+    except OSError as error:
+      print("Could not create results_dir")
+    assert os.path.exists(params["results_dir"]), "results_dir doesn't exist"
 
   if params["mode"] == "train":
     train( params)
   elif params["mode"] == "eval":
     evaluate(params)
-  
+
 if __name__ =="__main__":
   main()
