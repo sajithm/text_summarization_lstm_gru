@@ -34,7 +34,6 @@ def main():
 
   args = parser.parse_args()
   params = vars(args)
-  print(params)
 
   assert params["mode"], "mode is required and must be train or eval"
   assert params["mode"] in ["train", "eval"], "The mode must be train or eval"
