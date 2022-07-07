@@ -2,6 +2,7 @@ import tensorflow as tf
 import glob
 import os
 import ntpath
+import warnings
 
 class Vocab:
   
@@ -23,8 +24,8 @@ class Vocab:
     with open(vocab_file, 'r') as f:
       for line in f:
         pieces = line.split()
-        if len(pieces) != 2 :
-          print('Warning : incorrectly formatted line in vocabulary file : %s\n' % line)
+        if len(pieces) != 2:
+          warnings.warn(f"Incorrectly formatted line in vocabulary file {line}")
           continue
           
         w = pieces[0]
