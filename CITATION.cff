@@ -1,0 +1,19 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Comparing the performance of LSTM and GRU for Text
+  Summarization using Pointer Generator Networks
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Sajith
+    email: sajithm@msn.com
+    family-names: Madhavan
+    orcid: 'https://orcid.org/0000-0002-8227-6144'
+repository-code: >-
+  https://github.com/sajithm/text_summarization_lstm_gru
+license: Apache-2.0
